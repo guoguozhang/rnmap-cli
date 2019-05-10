@@ -1,0 +1,19 @@
+{
+  "name": "rnmap-cli",
+  "version": "1.1.0",
+  "description": "map source file for react-natvie",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rnmap": "node index.js"
+  },
+  "author": "zzg",
+  "license": "ISC",
+  "bin": {
+    "rnmap": "index.js"
+  },
+  "dependencies": {
+    "commander": "^2.20.0",
+    "io-spin": "^0.4.1",
+    "source-map": "^0.5.6"
+  }
+}
