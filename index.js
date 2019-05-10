@@ -7,12 +7,14 @@ const spin = require('io-spin');
 const program = require('commander');
 
 const map_name = './tmp/bundle.map';
-const spinner = spin('mapping source file...');
 
 program
     .option('-c, --cache', 'cache map file')
     .option('-a, --android', 'android platform')
     .parse(process.argv);
+
+const platform = program.android ? 'android' : 'ios';
+const spinner = spin('mapping ' + platform + ' source file...');
 
 showCrashInfo();
 
@@ -21,8 +23,7 @@ function showCrashInfo() {
     if (fs.existsSync(map_name)) {
         mapSourceFile();
     } else {
-        const bundle_command = 'react-native bundle --entry-file index.js  --platform ' + (program.android ? 'android' : 'ios') + ' --dev false --bundle-output ./tmp/main.jsbundle --assets-dest ./tmp/bundle --sourcemap-output ' + map_name;
-        console.log(bundle_command);
+        const bundle_command = 'react-native bundle --entry-file index.js  --platform ' + platform + ' --dev false --bundle-output ./tmp/main.jsbundle --assets-dest ./tmp/bundle --sourcemap-output ' + map_name;
         const bundle_process = child_process.exec('mkdir tmp;' + bundle_command, function (err, stdout) {
             if (err) console.log(err);
             bundle_process.kill();
